@@ -22,10 +22,10 @@ public class Barman extends Thread {
 
 	
 	Barman(  CountDownLatch startSignal,int schedAlg) {
-		if (schedAlg==0)
+		if (schedAlg==0) //if command argument is 0 run fifo otherwise run sjf
 			this.orderQueue = new LinkedBlockingQueue<>();
-		//FIX below
-		else this.orderQueue = new LinkedBlockingQueue<>(); //this just does the same thing 
+		
+		else this.orderQueue = new PriorityBlockingQueue<>(); //adding a priority queue to prioritise drinks with the shortest time
 		
 	    this.startSignal=startSignal;
 	}
