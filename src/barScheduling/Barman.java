@@ -18,11 +18,10 @@ public class Barman extends Thread {
 
 	private CountDownLatch startSignal;
 	private BlockingQueue<DrinkOrder> orderQueue;
-
-
+	int drinksCount;
 	
 	Barman(  CountDownLatch startSignal,int schedAlg) {
-		if (schedAlg==0) //if command argument is 0 run fifo otherwise run sjf
+		if (schedAlg==0) 
 			this.orderQueue = new LinkedBlockingQueue<>();
 		
 		else this.orderQueue = new PriorityBlockingQueue<>(); //adding a priority queue to prioritise drinks with the shortest time
@@ -33,8 +32,12 @@ public class Barman extends Thread {
 	
 	public void placeDrinkOrder(DrinkOrder order) throws InterruptedException {
         orderQueue.put(order);
+		drinksCount+=1;
     }
 	
+	public int drinkCount(){
+		return drinksCount;
+	}
 	
 	public void run() {
 		try {

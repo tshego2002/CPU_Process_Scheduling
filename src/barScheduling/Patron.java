@@ -1,4 +1,5 @@
 //M. M. Kuttel 2024 mkuttel@gmail.com
+//edited by Tshegofatso Kgole
 package barScheduling;
 
 import java.io.FileOutputStream;
@@ -23,9 +24,8 @@ public class Patron extends Thread {
 	private long startTime, endTime; //for all the metrics
 	
 	public static FileWriter fileW;
-
-
 	private DrinkOrder [] drinksOrder;
+
 	
 	Patron( int ID,  CountDownLatch startSignal, Barman aBarman) {
 		this.ID=ID;
@@ -42,7 +42,6 @@ public class Patron extends Thread {
 	}
 	
 	
-
 	public void run() {
 		try {
 			//Do NOT change the block of code below - this is the arrival times
@@ -52,26 +51,48 @@ public class Patron extends Thread {
 	        sleep(arrivalTime);// Patrons arrive at staggered  times depending on ID 
 			System.out.println("thirsty Patron "+ this.ID +" arrived");
 			//END do not change
-			
+
+			int firstDrinkServedTime = Integer.MAX_VALUE; // Initialize with maximum value
+			long firstDrinkReceivedTime = 1; // Initialize to 1 indicating no drinks received yet
+			int totalDrinksTime = 0;			
+
 	        //create drinks order
 	        for(int i=0;i<lengthOfOrder;i++) {
 	        	drinksOrder[i]=new DrinkOrder(this.ID);
-	        	
+				firstDrinkServedTime = Math.min(firstDrinkServedTime, drinksOrder[i].getExecutionTime());	        	
 	        }
+
+
 			System.out.println("Patron "+ this.ID + " submitting order of " + lengthOfOrder +" drinks"); //output in standard format  - do not change this
 	        startTime = System.currentTimeMillis();//started placing orders
+
 			for(int i=0;i<lengthOfOrder;i++) {
 				System.out.println("Order placed by " + drinksOrder[i].toString());
+				// Calculate preparation time for the current drink order
+				String[] parts = drinksOrder[i].toString().split(":");
+				int drinkPrepTime = DrinkOrder.getPreparationTimeByName(parts[1].trim());
+				
+				// Update total drinks time
+				totalDrinksTime += drinkPrepTime;
 				theBarman.placeDrinkOrder(drinksOrder[i]);
 			}
+
 			for(int i=0;i<lengthOfOrder;i++) {
 				drinksOrder[i].waitForOrder();
+				// Check if the first drink has been received yet by comparing expected prep time
+				if(firstDrinkReceivedTime == 1) { //check if the first drink still has not yet arrived.
+					if (drinksOrder[i].getExecutionTime() == firstDrinkServedTime) {
+						firstDrinkReceivedTime = System.currentTimeMillis();
+					}
+				}
 			}
 
 			endTime = System.currentTimeMillis();
 			long totalTime = endTime - startTime;
-			
-			writeToFile( String.format("%d,%d,%d\n",ID,arrivalTime,totalTime));
+	
+			SchedulingSimulation schedulingSimulation = new SchedulingSimulation();
+			schedulingSimulation.calculateAndRecordMetrics(this.ID, arrivalTime, totalDrinksTime, totalTime, (firstDrinkReceivedTime-startTime));
+			//writeToFile( String.format("%d,%d,%d\n",ID,arrivalTime,totalTime));
 			System.out.println("Patron "+ this.ID + " got order in " + totalTime);
 			
 			

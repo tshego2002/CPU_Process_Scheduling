@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
-public class DrinkOrder  {
+public class DrinkOrder implements Comparable<DrinkOrder>  {
 
     //DO NOT change the code below
     public enum Drink { 
@@ -64,6 +64,16 @@ public class DrinkOrder  {
         int randomIndex = random.nextInt(drinks.length);  // Generate a random index
         return drinks[randomIndex];  // Return the randomly selected drink
     }
+
+    //getting preparation times for drinks using their name
+    public static int getPreparationTimeByName(String drinkName) {
+        for (Drink drink : Drink.values()) {
+            if (drink.getName().equalsIgnoreCase(drinkName)) {
+                return drink.getPreparationTime();
+            }
+        }
+        throw new IllegalArgumentException("Invalid drink name: " + drinkName);//throwing an error for an invalid drink name
+    }
     
 
     public int getExecutionTime() {
@@ -86,5 +96,10 @@ public class DrinkOrder  {
     @Override
     public String toString() {
         return Integer.toString(orderer) +": "+ drink.getName();
+    }
+
+    @Override
+    public int compareTo(DrinkOrder order) {
+        return Integer.compare(this.getExecutionTime(), order.getExecutionTime());
     }
 }
