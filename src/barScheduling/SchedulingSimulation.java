@@ -1,5 +1,6 @@
-//M. M. Kuttel 2024 mkuttel@gmail.com
-// Edited by Tshegofatso Kgole
+/* M. M. Kuttel 2024 mkuttel@gmail.com
+Edited by Tshegofatso Kgole
+*/
 
 package barScheduling;
 // the main class, starts all threads
@@ -11,8 +12,8 @@ import java.util.concurrent.CountDownLatch;
 
 
 public class SchedulingSimulation {
-	static int noPatrons=10; //number of customers - default value if not provided on command line
-	static int sched=0; //which scheduling algorithm, 0= FCFS 1= SJS 2=RR
+	static int noPatrons=100; //number of customers - default value if not provided on command line
+	static int sched=0; //which scheduling algorithm, 0= FCFS 1= SJF 2=RR
 			
 	static CountDownLatch startSignal;
 

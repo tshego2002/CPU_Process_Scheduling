@@ -1,3 +1,7 @@
+/* M. M. Kuttel 2024 mkuttel@gmail.com
+Edited by Tshegofatso Kgole
+*/
+
 package barScheduling;
 
 import java.util.Hashtable;
@@ -22,8 +26,7 @@ public class DrinkOrder implements Comparable<DrinkOrder>  {
         PinaColada("Pina Colada", 200),
         LongIslandIcedTea("Long Island Iced Tea", 300),
     	B52("B52", 500);
-    	
-    	
+    	    	
         private final String name;
         private final int preparationTime; // in minutes
         
@@ -46,18 +49,18 @@ public class DrinkOrder implements Comparable<DrinkOrder>  {
             return name;
         }
     }
-    
+
     private final Drink drink;
     private static final Random random = new Random();
     private int orderer;
     private AtomicBoolean orderComplete;
+        //Constructor
+        public DrinkOrder(int patron) {
+            drink=getRandomDrink();
+            orderComplete = new AtomicBoolean(false);
+            orderer=patron;
+        }
 
- //constructor
-    public DrinkOrder(int patron) {
-    	drink=getRandomDrink();
-    	orderComplete = new AtomicBoolean(false);
-    	orderer=patron;
-    }
     
     public static Drink getRandomDrink() {
         Drink[] drinks = Drink.values();  // Get all enum constants

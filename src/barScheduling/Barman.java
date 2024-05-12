@@ -1,8 +1,11 @@
+/* M. M. Kuttel 2024 mkuttel@gmail.com
+Edited by Tshegofatso Kgole
+*/
+
 package barScheduling;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import java.util.Comparator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;

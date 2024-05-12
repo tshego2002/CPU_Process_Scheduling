@@ -1,7 +1,8 @@
-//M. M. Kuttel 2024 mkuttel@gmail.com
-//edited by Tshegofatso Kgole
-package barScheduling;
+/* M. M. Kuttel 2024 mkuttel@gmail.com
+Edited by Tshegofatso Kgole
+*/
 
+package barScheduling;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,20 +10,17 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 /*
- This is the basicclass, representing the patrons at the bar
+ This is the basic class, representing the patrons at the bar
  */
 
 public class Patron extends Thread {
 	
 	private Random random = new Random();// for variation in Patron behaviour
-
 	private CountDownLatch startSignal; //all start at once, actually shared
 	private Barman theBarman; //the Barman is actually shared though
-
 	private int ID; //thread ID 
 	private int lengthOfOrder;
 	private long startTime, endTime; //for all the metrics
-	
 	public static FileWriter fileW;
 	private DrinkOrder [] drinksOrder;
 
@@ -101,7 +99,7 @@ public class Patron extends Thread {
 			//  Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+	}
 }
 	
 
