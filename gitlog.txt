@@ -1,0 +1,29 @@
+commit 5c9df0868acaff0a582f5a77975c8982f1192db7
+Author: tshego2002 <tshegokgole6@gmail.com>
+Date:   Sun May 12 21:51:17 2024 +0200
+
+    Code Clean up
+
+commit bead679c05c6965a92c05efc9e43bf212ad8ebd2
+Author: tshego2002 <tshegokgole6@gmail.com>
+Date:   Sat May 11 20:50:59 2024 +0200
+
+    Adding JFS Algorithm
+
+commit ed23b2ff7aef2966f708cc9147f4a96044a0d621
+Author: tshego2002 <tshegokgole6@gmail.com>
+Date:   Fri May 10 19:19:10 2024 +0200
+
+    Adding Priority Blocking Queue for SJF
+
+commit bb5c51f9ba96e0fac7d5a19f2743b20112334009
+Author: tshego2002 <tshegokgole6@gmail.com>
+Date:   Fri May 10 18:09:22 2024 +0200
+
+    Adding a Makefile
+
+commit ee8d98a905a5f111a5c3f9a244166ae965779a4c
+Author: tshego2002 <tshegokgole6@gmail.com>
+Date:   Thu May 9 18:02:39 2024 +0200
+
+    Initial skeleton code
